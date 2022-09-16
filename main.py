@@ -20,7 +20,7 @@ ev3 = EV3Brick()
 left_motor = Motor(Port.B)
 right_motor = Motor(Port.C)
 color_sensor = ColorSensor(Port.S3)
-
+spin_motor = Motor(Port.D)
 
 #Begin Drivebase
 robot = DriveBase(right_motor, left_motor, wheel_diameter=55.5, axle_track=104)
@@ -34,4 +34,6 @@ while True:
      robot.drive(-30,50)
      elif color.reflection() == 5:
       robot.exit
-
+      
+while True:
+  spin_motor.run_target(1000, 36000)
