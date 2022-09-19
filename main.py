@@ -61,3 +61,61 @@ while True:
         
   while True:
     spin_motor.run_target(1000, 36000)
+
+
+
+
+#!/usr/bin/env pybricks-micropython
+from pybricks.hubs import EV3Brick
+from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
+                                 InfraredSensor, UltrasonicSensor, GyroSensor)
+from pybricks.parameters import Port, Stop, Direction, Button, Color
+from pybricks.tools import wait, StopWatch, DataLog
+from pybricks.robotics import DriveBase
+from pybricks.media.ev3dev import SoundFile, ImageFile
+
+# This program requires LEGO EV3 MicroPython v2.0 or higher.
+# Click "Open user guide" on the EV3 extension tab for more information.
+
+
+# Create your objects here.
+ev3 = EV3Brick()
+
+
+# Initialize Motors
+left_motor = Motor(Port.B)
+right_motor = Motor(Port.C)
+
+#Initialize the Colour Sensor
+line_sensor = ColorSensor(Port.S3)
+
+#Initialize the Drivebase
+robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
+
+#Calculate Light Threshold
+BLACK = 8
+WHITE = 48
+threshold = (BLACK + WHITE) / 2
+
+#Set the drive speed at 100mm
+DRIVE_SPEED = 50
+
+#Proprtinal Gain
+PROPORTIONAL_GAIN = 6.4
+
+#Follow the Line 
+
+while True:
+  #Calculate the deviation from the threshld
+  deviation = line_sensor.reflection() - threshold
+
+  #Calculate the turn rate
+  turn_rate = PROPORTIONAL_GAIN * deviation * -1
+
+  #Further Set the drive base speed and turn rate
+  robot.drive(DRIVE_SPEED, turn_rate)
+
+  #Wait
+  wait(10)
+  
+  
