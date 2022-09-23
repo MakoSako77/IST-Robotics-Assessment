@@ -18,20 +18,20 @@ US = UltrasonicSensor(Port.S4)
 CS = ColorSensor(Port.S3)
 ARM = Motor(Port.D)
 robot = DriveBase(LMotor, RMotor, wheel_diameter=50, axle_track=126)
-#Calibrate this :)  no share thx comsdfadfladhlasjdlsajdklsajd 
+#Calibrate these values. Do not share with anyone!!! 
 # Calculate the light threshold. Choose values based on your measurements.
-black = 10
-white = 85
+black = 8
+white = 44
 threshold = (black+white)/2
-
+green = 8,9,10,11
 
 # Start following the line endlessly.
-while CS.color != COLOR.RED: #
-    ARM.run(360)
+while CS.color != Color.RED: 
+    ARM.run(1000)
     if CS.reflection() < threshold:
-         robot.drive(40,50)
+        robot.drive(45,50)
+     
     else:
-         robot.drive(40,-50)
-
-
-wait(10)
+         robot.drive(45,-50)
+    if CS.color == green:
+        robot.straight(10)
