@@ -35,7 +35,7 @@ while CS.color != Color.RED:
          robot.drive(45,50)
     if CS.color == Color.GREEN:
         robot.drive(30, 80)
-        green + 1
+        green += 1
     if green == 7:
         robot.turn(180)
         
