@@ -14,7 +14,7 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 ev3 = EV3Brick()
 LMotor = Motor(Port.B)
 RMotor = Motor(Port.C)
-US = UltrasonicSensor(Port.S4)
+supersonic_sensor = UltrasonicSensor(Port.S4)
 CS = ColorSensor(Port.S3)
 ARM = Motor(Port.D)
 robot = DriveBase(LMotor, RMotor, wheel_diameter=50, axle_track=126)
@@ -23,15 +23,22 @@ robot = DriveBase(LMotor, RMotor, wheel_diameter=50, axle_track=126)
 black = 8
 white = 44
 threshold = (black+white)/2
-green = 8,9,10,11
+green = 0
 
 # Start following the line endlessly.
 while CS.color != Color.RED: 
-    ARM.run(1000)
+    ARM.run(500)
     if CS.reflection() < threshold:
-        robot.drive(45,50)
+        robot.drive(45,-50)
      
     else:
-         robot.drive(45,-50)
-    if CS.color == green:
-        robot.straight(10)
+         robot.drive(45,50)
+    if CS.color == Color.GREEN:
+        robot.drive(30, 80)
+        green + 1
+    if green == 7:
+        robot.turn(180)
+        
+
+while supersonic_sensor.distance() < 200
+idk
