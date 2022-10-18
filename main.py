@@ -43,4 +43,4 @@ while CS.color != Color.RED:
 
             if checkpoints == 7:
                robot.drive(45, 50)
-                robot.turn(180)s
+                robot.turn(180)
