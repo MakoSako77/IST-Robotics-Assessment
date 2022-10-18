@@ -35,10 +35,12 @@ while CS.color != Color.RED:
          robot.drive(45,50)
     if CS.color == Color.GREEN:
         robot.drive(30, 80)
-        green += 1
-    if green == 7:
-        robot.turn(180)
-        
+       # green += 1
+   # if green == 7:
+     #   robot.turn(180)
+        if color_sensor.color() == Color.GREEN:
+            checkpoints += 1
 
-while supersonic_sensor.distance() < 200
-idk
+            if checkpoints == 7:
+               robot.drive(45, 50)
+                robot.turn(180)s
