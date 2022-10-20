@@ -23,7 +23,8 @@ robot = DriveBase(LMotor, RMotor, wheel_diameter=50, axle_track=126)
 black = 8
 white = 44
 threshold = (black+white)/2
-green = 0
+green_square = 0
+green_square_number = 0
 
 # Start following the line endlessly.
 while CS.color != Color.RED: 
@@ -35,12 +36,35 @@ while CS.color != Color.RED:
          robot.drive(45,50)
     if CS.color == Color.GREEN:
         robot.drive(30, 80)
-       # green += 1
-   # if green == 7:
-     #   robot.turn(180)
-        if color_sensor.color() == Color.GREEN:
-            checkpoints += 1
 
-            if checkpoints == 7:
-               robot.drive(45, 50)
-                robot.turn(180)
+        if green_square_number <= 1:
+            robot.drive(30, 80)
+        if CS.reflection() < threshold:
+            robot.drive(30, 80)
+        if CS.reflection() > threshold:
+            robot.drive(30, 80)
+        
+    if CS.color() == Color.GREEN:
+        green_square = 1
+        if CS.color() != Color.GREEN and green_square_number == 1 and CS.reflection() > 20:
+            green_square = 0
+            green_square_number = green_square_number + 1
+        
+        while green_square_number == 2:
+            ev3.speaker.beep()
+            ev3.speaker.beep()
+            ev3.speaker.beep()
+
+
+        
+        
+        
+        
+        
+        
+        
+        #CS.color() == Color.GREEN:
+         #   checkpoints += 1
+
+          #  if checkpoints == 7:
+           ##    robot.turn(180)
